@@ -67,10 +67,10 @@ todo.updateDate("0", "10 April");
 todo.flagComplete("0");
 todo.getAllTodos;
 
-const renderContent = () => {
+const renderContent = (todo) => {
   const wrapper = document.querySelector(".projects");
+  const bhaado = document.querySelector("table");
   todo.getAllTodos.forEach((todo) => {
-    const bhaado = document.querySelector("table");
     const row = document.createElement("tr");
     const classToAppend = todo.isCompleted
       ? "completed "
@@ -83,9 +83,18 @@ const renderContent = () => {
     }</td>`;
     bhaado.appendChild(row);
   });
+  const oneP = document.querySelector(".oneProject");
+  const addTodoButton = document.createElement("button");
+  addTodoButton.innerText = "Add Todos";
+  oneP.appendChild(addTodoButton);
+  const addProjectButton = document.createElement("button");
+  addProjectButton.innerText = "Add Projects";
+  wrapper.appendChild(addProjectButton);
+  wrapper.classList.add("proj");
+  addTodoButton.classList.add("todos");
 };
 
-renderContent();
+renderContent(todo);
 
 const inCompletedChid = document
   .querySelector(".incompleted")
@@ -94,3 +103,9 @@ const inCompletedChid = document
     e.target.className = "completed";
     e.target.innerText = "true";
   });
+
+const addProjectFunction = () => {
+  const toDo1 = new ToDo();
+  todo.addTodo("Demo todo", "Thois is the description ", "2nd April");
+  todo.addTodo("Demo todo2", "Thois is the description2 ", "2nd April");
+};
