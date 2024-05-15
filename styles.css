@@ -22,12 +22,19 @@ body {
   font-family: fantasy;
 }
 
-.item {
-  background-color: whitesmoke;
-  text-decoration: none;
-  border: 1px solid black;
+.head {
+  text-align: center;
+  color: black;
 }
-
+.mega {
+  text-align: center;
+}
+.projects {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
 .completed {
   color: green;
 }
@@ -41,8 +48,18 @@ body {
   padding: 10px;
   display: flex;
   flex-direction: column;
-  max-width: 500px;
   align-items: center;
+  max-width: 500px;
+}
+th,
+td {
+  padding: 10px;
+}
+th {
+  border-bottom: 1px solid rgb(6, 208, 208);
+}
+table {
+  border: 1px solid rgb(6, 208, 208);
 }
 button {
   margin: 10px;

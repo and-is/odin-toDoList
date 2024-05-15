@@ -1,7 +1,11 @@
-class ToDo {
+var projId = 0;
+class Project {
   todos = [];
   currentId = -1;
-
+  pId = projId++;
+  get getProjectId() {
+    return this.pId;
+  }
   addTodo = (title, description, dueDate) => {
     this.currentId = this.currentId + 1;
 
@@ -19,7 +23,6 @@ class ToDo {
   }
 
   get getAllTodos() {
-    console.log(this.todos);
     return this.todos;
   }
 
@@ -58,54 +61,59 @@ class ToDo {
   }
 }
 
-const todo = new ToDo();
-todo.addTodo("Demo todo", "Thois is the description ", "2nd April");
-todo.addTodo("Demo todo2", "Thois is the description2 ", "2nd April");
-todo.getAllTodos;
-// todo.removeTodoWithId("0");
-todo.updateDate("0", "10 April");
-todo.flagComplete("0");
-todo.getAllTodos;
-
-const renderContent = (todo) => {
-  const wrapper = document.querySelector(".projects");
-  const bhaado = document.querySelector("table");
-  todo.getAllTodos.forEach((todo) => {
+const renderContent = (proj) => {
+  const projects = document.querySelector(".projects");
+  const container = document.createElement("div");
+  container.classList.add("oneProject");
+  const butt = document.createElement("button");
+  butt.innerText = "Add Todos";
+  butt.addEventListener("click", () => {
+    proj.addTodo(
+      "Walk",
+      "walk for some distance so whatever you've eaten gets digested",
+      "18th May"
+    );
+    container.innerText = "";
+    container.classList.remove("oneProject");
+    renderProjects(proj);
+  });
+  const table = document.createElement("table");
+  const headRow = document.createElement("tr");
+  headRow.innerHTML =
+    "<th>SN</th><th>Title</th><th>Description</th><th>Due Date</th><th>Completion</th>";
+  table.appendChild(headRow);
+  proj.getAllTodos.forEach((p) => {
     const row = document.createElement("tr");
-    const classToAppend = todo.isCompleted
-      ? "completed "
-      : "incompleted " + "toClick";
-
-    row.innerHTML = `<td>${todo.id + 1}.</td><td>${todo.title}</td><td>${
-      todo.description
-    }</td><td>${todo.dueDate}</td><td id=${todo.id} class=${classToAppend}>${
-      todo.isCompleted
-    }</td>`;
-    bhaado.appendChild(row);
+    row.innerHTML = `<td>${p.id + 1}.</td><td>${p.title}</td><td>${
+      p.description
+    }</td><td>${p.dueDate}</td><td>${p.isCompleted ? "Yes" : "No"}</td>`;
+    table.appendChild(row);
   });
-  const oneP = document.querySelector(".oneProject");
-  const addTodoButton = document.createElement("button");
-  addTodoButton.innerText = "Add Todos";
-  oneP.appendChild(addTodoButton);
-  const addProjectButton = document.createElement("button");
-  addProjectButton.innerText = "Add Projects";
-  wrapper.appendChild(addProjectButton);
-  wrapper.classList.add("proj");
-  addTodoButton.classList.add("todos");
+  container.appendChild(table);
+  container.appendChild(butt);
+  projects.appendChild(container);
 };
 
-renderContent(todo);
-
-const inCompletedChid = document
-  .querySelector(".incompleted")
-  .addEventListener("click", (e) => {
-    todo.flagComplete(e.target.id);
-    e.target.className = "completed";
-    e.target.innerText = "true";
-  });
-
-const addProjectFunction = () => {
-  const toDo1 = new ToDo();
-  todo.addTodo("Demo todo", "Thois is the description ", "2nd April");
-  todo.addTodo("Demo todo2", "Thois is the description2 ", "2nd April");
+const renderProjects = (proj) => {
+  renderContent(proj);
 };
+
+const butt2 = document.createElement("button");
+butt2.innerText = "Add Projects";
+butt2.addEventListener("click", () => {
+  proj1 = new Project();
+  proj1.addTodo(
+    "Eat",
+    "eat something that fills your stomach for some time",
+    "18th May"
+  );
+  proj1.addTodo(
+    "Walk",
+    "walk for some distance so whatever you've eaten gets digested",
+    "18th May"
+  );
+  renderProjects(proj1);
+});
+
+const projects = document.querySelector(".mega");
+projects.appendChild(butt2);
