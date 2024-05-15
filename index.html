@@ -13,6 +13,30 @@
       <div class="projects"></div>
     </div>
     <div class="footer">Andis Paudel @ tOP</div>
+    <dialog class="addProjectDialog">
+      <form class="addProjectForm" method="dialog">
+        <label for="projectName">Name of project: </label>
+        <input type="text" id="projectName" />
+        <div class="btns">
+          <button id="submit">Add</button>
+          <button id="cancel">Cancel</button>
+        </div>
+      </form>
+    </dialog>
+    <dialog class="addTodoDialog">
+      <form class="addTodoForm" method="dialog">
+        <label for="todoTitle">Give your todo a title: </label>
+        <input type="text" id="todoTitle" />
+        <label for="description">Describe your todo: </label>
+        <input type="text" id="description" />
+        <label for="dueDate">When's the todo due? </label>
+        <input type="text" id="dueDate" />
+        <div class="btns">
+          <button id="submitTodo">Add</button>
+          <button id="cancel">Cancel</button>
+        </div>
+      </form>
+    </dialog>
     <script src="./scripts.js"></script>
   </body>
 </html>

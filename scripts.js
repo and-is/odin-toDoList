@@ -1,5 +1,8 @@
 var projId = 0;
 class Project {
+  constructor(name) {
+    this.name = name;
+  }
   todos = [];
   currentId = -1;
   pId = projId++;
@@ -68,14 +71,22 @@ const renderContent = (proj) => {
   const butt = document.createElement("button");
   butt.innerText = "Add Todos";
   butt.addEventListener("click", () => {
-    proj.addTodo(
-      "Walk",
-      "walk for some distance so whatever you've eaten gets digested",
-      "18th May"
-    );
-    container.innerText = "";
-    container.classList.remove("oneProject");
-    renderProjects(proj);
+    const todoDialog = document.querySelector(".addTodoDialog");
+    todoDialog.showModal();
+    const submitTodoBtn = document.querySelector("#submitTodo");
+    const dueDat = document.querySelector("#dueDate");
+    const descr = document.querySelector("#description");
+    const titl = document.querySelector("#todoTitle");
+    let tit, des, dd;
+    submitTodoBtn.addEventListener("click", () => {
+      tit = titl.value;
+      des = descr.value;
+      dd = dueDat.value;
+      proj.addTodo(tit, des, dd);
+      container.innerText = "";
+      container.classList.remove("oneProject");
+      renderContent(proj);
+    });
   });
   const table = document.createElement("table");
   const headRow = document.createElement("tr");
@@ -89,30 +100,27 @@ const renderContent = (proj) => {
     }</td><td>${p.dueDate}</td><td>${p.isCompleted ? "Yes" : "No"}</td>`;
     table.appendChild(row);
   });
+  const title = document.createElement("h1");
+  title.innerText = proj.name;
+  container.appendChild(title);
   container.appendChild(table);
   container.appendChild(butt);
   projects.appendChild(container);
 };
 
-const renderProjects = (proj) => {
-  renderContent(proj);
-};
-
 const butt2 = document.createElement("button");
 butt2.innerText = "Add Projects";
 butt2.addEventListener("click", () => {
-  proj1 = new Project();
-  proj1.addTodo(
-    "Eat",
-    "eat something that fills your stomach for some time",
-    "18th May"
-  );
-  proj1.addTodo(
-    "Walk",
-    "walk for some distance so whatever you've eaten gets digested",
-    "18th May"
-  );
-  renderProjects(proj1);
+  const projectDialog = document.querySelector(".addProjectDialog");
+  projectDialog.showModal();
+  const submitBtn = document.querySelector("#submit");
+  const pN = document.querySelector("#projectName");
+  let nm;
+  submitBtn.addEventListener("click", () => {
+    nm = pN.value;
+    proj1 = new Project(nm);
+    renderContent(proj1);
+  });
 });
 
 const projects = document.querySelector(".mega");

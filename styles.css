@@ -77,3 +77,30 @@ button:hover {
 .proj {
   text-align: center;
 }
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+dialog {
+  margin: auto;
+  margin-top: 200px;
+  border-radius: 10px;
+  border: none;
+}
+label {
+  font-family: sans-serif;
+  font-weight: bold;
+}
+input {
+  border: 2px solid rgb(6, 208, 208);
+  border-radius: 5px;
+  height: 20px;
+}
+
+::backdrop {
+  background: linear-gradient(rgb(0, 225, 225), white);
+  opacity: 0.8;
+}
